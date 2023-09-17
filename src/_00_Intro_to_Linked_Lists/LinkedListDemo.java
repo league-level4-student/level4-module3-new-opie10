@@ -31,7 +31,28 @@ public class LinkedListDemo {
          * String nodes.
          * 
          */
-
+    	LinkedList<Character> test = new LinkedList<>();
+    	test.add('i');
+    	test.add('i');
+    	test.add('e');
+    	test.add('i');
+    	test.add('i');
+    	test.add('a');
+    	test.add('z');
+    	test.print();
+    	Node h =test.getHead();
+    	Node t =test.getTail();
+    	for (int i = 0; i < test.size()-1; i++) {
+    		if (i==0) {
+    			Character c = Character.toUpperCase((char) h.getValue());
+    			h.setValue(c);
+    		}
+			Node n = h.getNext();
+			Character c = Character.toUpperCase((char) n.getValue());
+			n.setValue(c);
+			h=n;
+		}
+    	test.print();
     }
 
 }
