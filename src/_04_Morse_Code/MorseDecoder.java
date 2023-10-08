@@ -1,6 +1,9 @@
 package _04_Morse_Code;
 
+import java.util.ArrayList;
+
 import _03_Intro_to_Binary_Trees.BinaryTree;
+import _03_Intro_to_Binary_Trees.Node;
 
 public class MorseDecoder {
 
@@ -65,6 +68,44 @@ public class MorseDecoder {
      */
     void decode() {
         String morseCode = "-.-- --- ..- .- .-. . .- -- .- --.. .. -. --.";
+        String[] decoder =  morseCode.split(" ");
+        for (int j = 0; j < decoder.length; j++) {
+       String answer=	sAd(mcTree.getRoot(),decoder[j]);
+		decoder[j]= answer;
+        }
+        String finalAnswer ="";
+        for (int i = 0; i < decoder.length; i++) {
+			finalAnswer = finalAnswer+decoder[i];
+		}
+        System.out.println(finalAnswer);
+    }
+    private String sAd(Node<MorseCode> root, String search) {
+    	String decode = "";
+    	if (root == null) {
+			
+    		
+    		return "nothing";
+        	}
+			
+		
+    	
+    	sAd(root.getLeft(),search);
+    	
+    	if (root.getValue().getCoded().equals(search)) {
+    		return root.getValue().getDecoded();
+    	}
+			
+			sAd(root.getRight(),search);
+    	
+    	
+			
+			return root.getValue().getDecoded();
+    	
+    	 
+    	
+    	
+    	
+		    	
     }
 
 }
