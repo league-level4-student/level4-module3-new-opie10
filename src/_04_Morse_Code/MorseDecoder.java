@@ -1,6 +1,7 @@
 package _04_Morse_Code;
 
 import java.util.ArrayList;
+import java.util.Scanner;
 
 import _03_Intro_to_Binary_Trees.BinaryTree;
 import _03_Intro_to_Binary_Trees.Node;
@@ -13,16 +14,21 @@ public class MorseDecoder {
 
         MorseDecoder md = new MorseDecoder();
         md.initialize();
-        md.decode();
-
+        Scanner s = new Scanner(System.in);
+        System.out.println("Enter Your Morse code (No space characters):");
+      String code = s.nextLine();
+        
+       String decodedFinal = md.decode(code);
+       System.out.println("Here is your translation: "+ decodedFinal);
+       
     }
 
     public void initialize() {
 
-        mcTree.insert(new MorseCode("start", ""));
+        mcTree.insert(new MorseCode(" ", ""));
         mcTree.insert(new MorseCode("e", "."));
         mcTree.insert(new MorseCode("t", "-"));
-
+        
         mcTree.insert(new MorseCode("i", ".."));
         mcTree.insert(new MorseCode("a", ".-"));
         mcTree.insert(new MorseCode("n", "-."));
@@ -36,7 +42,7 @@ public class MorseDecoder {
         mcTree.insert(new MorseCode("k", "-.-"));
         mcTree.insert(new MorseCode("g", "--."));
         mcTree.insert(new MorseCode("o", "---"));
-
+        
         mcTree.insert(new MorseCode("h", "...."));
         mcTree.insert(new MorseCode("v", "...-"));
         mcTree.insert(new MorseCode("f", "..-."));
@@ -49,8 +55,8 @@ public class MorseDecoder {
         mcTree.insert(new MorseCode("y", "-.--"));
         mcTree.insert(new MorseCode("z", "--.."));
         mcTree.insert(new MorseCode("q", "--.-"));
-
-        mcTree.printVertical();
+        
+    //    mcTree.printVertical();
 
     }
 
@@ -66,40 +72,36 @@ public class MorseDecoder {
      * english alphabet.
      * 
      */
-    void decode() {
-        String morseCode = "-.-- --- ..- .- .-. . .- -- .- --.. .. -. --.";
+ private String decode(String morseCode) {
+    	
+    	String decode = "";
+    	String answer = "";
+    //   morseCode = "-.-- --- ..- .- .-. . .- -- .- --.. .. -. --."; //ONLY FOR THE ORIGINAL DECODER, REMOVE FOR TRANSLATOR 
         String[] decoder =  morseCode.split(" ");
         for (int j = 0; j < decoder.length; j++) {
-       String answer=	sAd(mcTree.getRoot(),decoder[j]);
-		decoder[j]= answer;
+        answer=	 answer+sAd(mcTree.getRoot(),decoder[j],decode);
         }
-        String finalAnswer ="";
-        for (int i = 0; i < decoder.length; i++) {
-			finalAnswer = finalAnswer+decoder[i];
-		}
-        System.out.println(finalAnswer);
+       return answer;
+        
     }
-    private String sAd(Node<MorseCode> root, String search) {
-    	String decode = "";
-    	if (root == null) {
+    private String sAd(Node<MorseCode> root, String search, String dec) {
+    
+    	if (root != null) {
 			
-    		
-    		return "nothing";
+    		dec = sAd(root.getLeft(),search, dec);
+        	
+        	if (root.getValue().getCoded().equals(search)) {
+        		dec=dec+ root.getValue().getDecoded();
+        	}
+        	
+        	dec = sAd(root.getRight(),search,dec);
+    			
+        	
+    	
         	}
 			
-		
     	
-    	sAd(root.getLeft(),search);
-    	
-    	if (root.getValue().getCoded().equals(search)) {
-    		return root.getValue().getDecoded();
-    	}
-			
-			sAd(root.getRight(),search);
-    	
-    	
-			
-			return root.getValue().getDecoded();
+    		return dec;
     	
     	 
     	
