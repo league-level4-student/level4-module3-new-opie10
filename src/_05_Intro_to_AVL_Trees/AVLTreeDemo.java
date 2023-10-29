@@ -1,6 +1,7 @@
 package _05_Intro_to_AVL_Trees;
 
 import _03_Intro_to_Binary_Trees.BinaryTree;
+import _04_Morse_Code.MorseCode;
 
 public class AVLTreeDemo {
 
@@ -31,7 +32,33 @@ public class AVLTreeDemo {
      */
 
     public static void main(String[] args) {
-
+    	BinaryTree<String> binaryTree = new BinaryTree<String>();
+    	AVLTree<String> avlTree = new AVLTree<String>();
+    	avlTree.insert("hi");
+    	avlTree.insert("Hello");
+    	avlTree.insert("Hi");
+    	//avlTree.insert("Hey");
+    	avlTree.insert("hey");
+    	avlTree.insert("hello");
+    	//avlTree.insert("Hello ");
+    	avlTree.insert("hi");
+    	avlTree.insert("Guten");
+    	avlTree.insert("bye");
+    	
+    	binaryTree.insert("hi");
+    	binaryTree.insert("Hello");
+    	binaryTree.insert("Hi");
+    	//binaryTree.insert("Hey");
+    	binaryTree.insert("hey");
+    	binaryTree.insert("hello");
+    	binaryTree.insert("Hello");
+    	binaryTree.insert("hi");
+    	binaryTree.insert("Guten");
+    	//binaryTree.insert("bye");
+    	
+    	avlTree.printVertical();
+    	binaryTree.printVertical();
+    	
     }
 
 }
